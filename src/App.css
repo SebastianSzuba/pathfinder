@@ -1,0 +1,12 @@
+body {
+  background-color: black;
+  color: white;
+}
+
+#root {
+  display: flex;
+  flex-direction: row;
+  align-items: revert;
+  justify-content: space-between;
+  height: 100vh;
+}
