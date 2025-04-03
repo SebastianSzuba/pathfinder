@@ -9,7 +9,9 @@ Pathfinder ist ein einfaches und unterhaltsames Spiel, inspiriert von Cookie Cli
 - **Zufällige Gegner**: Gegner werden zufällig generiert, was für Abwechslung sorgt. 🎲
 - **Belohnungen**: Besiege Gegner, um Erfahrungspunkte (EXP) und Gold zu erhalten. 💰✨
 
-![Pathfinder Preview](https://ibb.co/7d2BX0fN)
+## Screenshot
+
+![Pathfinder Spielansicht](/src/assets/screenshot.png)
 
 ## Installation
 
