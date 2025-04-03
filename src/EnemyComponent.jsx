@@ -1,5 +1,5 @@
 import './EnemyComponent.css';
-import React, { useState, useEffect, useRef } from 'react'; // useRef importieren
+import React, { useState, useEffect, } from 'react'; //
 import EnemyData from './EnemyData';
 
 // Empfängt onEnemyDefeated als Prop
