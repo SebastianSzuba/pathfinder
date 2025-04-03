@@ -29,23 +29,48 @@ img {
   width: 450px;
   height: 450px;
   object-fit: contain;
+  margin-bottom: 10px; /* Platz vor dem Lebensbalken */
 }
 
-.health-line {
-  width: 100%;
-  height: 20px;
-  background-color: red;
-  position: relative;
-  margin-top: 10px;
-  margin-bottom: 30px;
+/* Container für den Lebensbalken */
+.health-bar-container {
+  width: 80%; /* Breite des Balkens relativ zur Box */
+  max-width: 300px; /* Maximale Breite */
+  height: 25px;
+  background-color: #e0e0e0; /* Hintergrund für den leeren Teil */
+  border-radius: 5px;
+  position: relative; /* Für die Positionierung des Textes */
+  margin: 10px auto; /* Zentrieren und Abstand */
+  overflow: hidden; /* Verhindert, dass der innere Balken überläuft */
 }
 
+/* Der eigentliche Lebensbalken (füllt sich) */
+.health-bar {
+  height: 100%;
+  background-color: red; /* Farbe für die aktuelle Gesundheit */
+  border-radius: 5px 0 0 5px; /* Abrundung links */
+  transition: width 0.3s ease-in-out; /* Sanfter Übergang bei Breitenänderung */
+  position: absolute; /* Positioniert relativ zum Container */
+  top: 0;
+  left: 0;
+}
+
+/* Textanzeige für Lebenspunkte */
 .health-text {
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%); /* Zentriert den Text exakt */
   color: white;
   font-weight: bold;
-  line-height: 20px; /* Vertikal zentrieren */
+  font-size: 0.9em;
+  text-shadow: 1px 1px 2px black; /* Bessere Lesbarkeit */
+  z-index: 1; /* Stellt sicher, dass der Text über dem Balken liegt */
+  width: 100%; /* Nimmt die volle Breite des Containers ein für die Zentrierung */
+  text-align: center;
+}
+
+/* Optional: Styling für das Helden-Icon */
+.hero-icon {
+  margin-top: 15px; /* Abstand nach oben */
 }
