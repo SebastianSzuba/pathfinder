@@ -1,4 +1,4 @@
-# Pathfinder
+Pathfinder
 
 Pathfinder ist ein einfaches und unterhaltsames Spiel, inspiriert von Cookie Clicker. Das Ziel ist es, Gegner zu besiegen, indem du kontinuierlich Schaden verursachst und durch Klicken zusätzlichen Schaden hinzufügst. Gegner werden zufällig generiert, was das Spiel dynamisch und spannend macht. 🕹️
 
@@ -8,6 +8,8 @@ Pathfinder ist ein einfaches und unterhaltsames Spiel, inspiriert von Cookie Cli
 - **Klick-Schaden**: Klicke auf den Gegner, um zusätzlichen Schaden zu verursachen. 🖱️
 - **Zufällige Gegner**: Gegner werden zufällig generiert, was für Abwechslung sorgt. 🎲
 - **Belohnungen**: Besiege Gegner, um Erfahrungspunkte (EXP) und Gold zu erhalten. 💰✨
+
+![Pathfinder Preview](https://ibb.co/7d2BX0fN)
 
 ## Installation
 
