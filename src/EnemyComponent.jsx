@@ -2,8 +2,8 @@ import './EnemyComponent.css';
 import React, { useState, useEffect, useRef } from 'react'; //
 import EnemyData from './EnemyData';
 
-// Empfängt onEnemyDefeated als Prop
-export default function EnemyComponent({ onEnemyDefeated }) {
+// Empfängt onEnemyDefeated, damagePerSecond und damagePerClick als Props
+export default function EnemyComponent({ onEnemyDefeated, damagePerSecond, damagePerClick }) {
     const [enemy, setEnemy] = useState(null);
     const [currentHealth, setCurrentHealth] = useState(0);
     const [moveDuration, setMoveDuration] = useState(2); // Standarddauer für die Bewegungsanimation
@@ -32,7 +32,8 @@ export default function EnemyComponent({ onEnemyDefeated }) {
 
         const intervalId = setInterval(() => {
             // Stellt sicher, dass die Gesundheit nicht unter 0 fällt
-            setCurrentHealth(prevHealth => Math.max(0, prevHealth - 1));
+            // Verwendet den damagePerSecond-Wert aus den Props
+            setCurrentHealth(prevHealth => Math.max(0, prevHealth - damagePerSecond));
         }, 1000); // Jede Sekunde
 
         // Aufräumfunktion
@@ -83,8 +84,8 @@ export default function EnemyComponent({ onEnemyDefeated }) {
         // Nur angreifen, wenn Gegner existiert und Gesundheit > 0
         if (!enemy || currentHealth <= 0) return;
 
-        // Reduziere Gesundheit um 3
-        setCurrentHealth(prevHealth => Math.max(0, prevHealth - 3));
+        // Reduziere Gesundheit um den damagePerClick-Wert aus den Props
+        setCurrentHealth(prevHealth => Math.max(0, prevHealth - damagePerClick));
 
         // Reduziere die Bildgröße bei jedem Klick um 10%
         const newScale = Math.max(0.3, imageScale - 0.1); // Nicht kleiner als 30%

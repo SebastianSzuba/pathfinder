@@ -41,8 +41,12 @@ function App() {
   return (
     <>
       <MenuComponent />
-      {/* Übergibt die Handler-Funktion an EnemyComponent */}
-      <EnemyComponent onEnemyDefeated={handleEnemyDefeated} />
+      {/* Übergibt die Handler-Funktion und Schadenswerte an EnemyComponent */}
+      <EnemyComponent
+        onEnemyDefeated={handleEnemyDefeated}
+        damagePerSecond={damagePerSecond}
+        damagePerClick={damagePerClick}
+      />
       {/* Übergibt Gold, EXP, Schadenswerte und Kauffunktion an PlayerInfo */}
       <PlayerInfo
         gold={playerGold}
