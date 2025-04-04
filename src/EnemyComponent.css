@@ -16,6 +16,7 @@ img {
   align-items: center;
   text-align: center;
   height: 330px;
+  position: relative; /* Für die absolute Positionierung des Lebensbalkens */
 }
 
 /* EnemyComponent.css */
@@ -44,6 +45,20 @@ img {
   overflow: hidden; /* Verhindert, dass der innere Balken überläuft */
 }
 
+/* Fixierter Lebensbalken-Container */
+.fixed-health-bar-container {
+  position: absolute; /* Zurück zu absolute statt fixed */
+  top: 100px; /* Abstand vom oberen Rand */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px; /* Feste Breite */
+  height: 25px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  z-index: 5; /* Niedrigerer z-index, damit er unter dem Namen liegt */
+}
+
 /* Der eigentliche Lebensbalken (füllt sich) */
 .health-bar {
   height: 100%;
@@ -70,7 +85,97 @@ img {
   text-align: center;
 }
 
-/* Optional: Styling für das Helden-Icon */
+/* Styling für das Helden-Icon */
 .hero-icon {
-  margin-top: 15px; /* Abstand nach oben */
+  position: absolute; /* Absolute Positionierung */
+  bottom: 10px; /* Am unteren Rand */
+  left: 50%; /* Zentriert */
+  transform: translateX(-50%); /* Zentriert */
+  z-index: 1; /* Niedriger z-index, damit es unter dem Bild liegt */
+}
+
+/* Styling für den Namen des Gegners */
+.enemy-name {
+  position: relative;
+  z-index: 10; /* Höherer z-index als der Lebensbalken */
+  margin-bottom: 10px; /* Abstand zum Lebensbalken */
+}
+
+/* Animierte Bildgröße basierend auf Gesundheit */
+.animated-image {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Container für das Bild mit Bewegungsanimation */
+.image-container {
+  position: relative;
+  display: inline-block;
+  width: 450px; /* Feste Breite */
+  height: 450px; /* Feste Höhe */
+  margin: 0 auto; /* Zentriert */
+  animation: moveLeftRight var(--move-duration, 2s) ease-in-out infinite;
+}
+
+/* Zufällige Bewegungsanimation für den Container */
+.random-move-container {
+  animation: randomMove var(--random-duration, 3s) ease-in-out infinite;
+}
+
+/* Klasse für die Bildgröße */
+.enemy-image {
+  width: auto;
+  height: auto;
+  max-width: 450px;
+  max-height: 450px;
+}
+
+@keyframes moveLeftRight {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-20px);
+  }
+  75% {
+    transform: translateX(20px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes randomMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-15px, 10px);
+  }
+  20% {
+    transform: translate(10px, -15px);
+  }
+  30% {
+    transform: translate(-10px, -10px);
+  }
+  40% {
+    transform: translate(15px, 5px);
+  }
+  50% {
+    transform: translate(0, 15px);
+  }
+  60% {
+    transform: translate(-5px, -5px);
+  }
+  70% {
+    transform: translate(10px, 10px);
+  }
+  80% {
+    transform: translate(-10px, 5px);
+  }
+  90% {
+    transform: translate(5px, -10px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
 }
