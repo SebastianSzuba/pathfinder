@@ -35,10 +35,13 @@ export default function PlayerInfo({ gold, exp, damagePerSecond, damagePerClick,
             <div className="shop-section">
                 <h3>🛒 Waffenshop</h3>
 
-                {/* Kaufmeldung anzeigen, wenn vorhanden */}
-                {purchaseMessage && (
-                    <div className="purchase-message">{purchaseMessage}</div>
-                )}
+                {/* Container für Kaufmeldung mit relativer Positionierung */}
+                <div className="purchase-message-container">
+                    {/* Kaufmeldung anzeigen, wenn vorhanden */}
+                    {purchaseMessage && (
+                        <div className="purchase-message">{purchaseMessage}</div>
+                    )}
+                </div>
 
                 <div className="weapons-container">
                     <h4>DPS-Waffen</h4>

@@ -11,11 +11,16 @@
   padding-top: 10px;
 }
 
+/* Container für die Kaufmeldung */
+.purchase-message-container {
+  min-height: 40px; /* Reserviert Platz für die Meldung */
+  margin: 15px 0; /* Abstand oben und unten */
+}
+
 .purchase-message {
   background-color: rgba(0, 0, 0, 0.7);
   color: #ffffff;
   padding: 8px;
-  margin: 10px 0;
   border-radius: 5px;
   text-align: center;
   font-weight: bold;
