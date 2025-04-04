@@ -9,9 +9,9 @@ function App() {
   const [playerGold, setPlayerGold] = useState(0);
   const [playerExp, setPlayerExp] = useState(0);
 
-  // Konstanten für Schaden pro Sekunde und pro Klick
-  const damagePerSecond = 1;
-  const damagePerClick = 3;
+  // State für Schaden pro Sekunde und pro Klick
+  const [damagePerSecond, setDamagePerSecond] = useState(1);
+  const [damagePerClick, setDamagePerClick] = useState(3);
 
   // Funktion zum Hinzufügen von Belohnungen, wenn ein Gegner besiegt wird
   const handleEnemyDefeated = (gold, exp) => {
@@ -20,17 +20,36 @@ function App() {
     console.log(`Spieler erhält ${gold} Gold und ${exp} EXP!`);
   };
 
+  // Funktion zum Kaufen von Waffen
+  const buyWeapon = (cost, dpsIncrease, dpcIncrease) => {
+    if (playerGold >= cost) {
+      setPlayerGold(prevGold => prevGold - cost);
+
+      if (dpsIncrease > 0) {
+        setDamagePerSecond(prevDPS => prevDPS + dpsIncrease);
+      }
+
+      if (dpcIncrease > 0) {
+        setDamagePerClick(prevDPC => prevDPC + dpcIncrease);
+      }
+
+      return true; // Kauf erfolgreich
+    }
+    return false; // Nicht genug Gold
+  };
+
   return (
     <>
       <MenuComponent />
       {/* Übergibt die Handler-Funktion an EnemyComponent */}
       <EnemyComponent onEnemyDefeated={handleEnemyDefeated} />
-      {/* Übergibt Gold, EXP und Schadenswerte an PlayerInfo */}
+      {/* Übergibt Gold, EXP, Schadenswerte und Kauffunktion an PlayerInfo */}
       <PlayerInfo
         gold={playerGold}
         exp={playerExp}
         damagePerSecond={damagePerSecond}
         damagePerClick={damagePerClick}
+        buyWeapon={buyWeapon}
       />
     </>
   )
