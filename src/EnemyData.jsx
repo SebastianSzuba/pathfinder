@@ -4,7 +4,7 @@ export default function EnemyData() {
         {
             id: 1,
             name: "Snake",
-            health: 1000,
+            health: 100,
             image: "/public/snake.png",
             exp: 50,
             gold: 20
@@ -12,7 +12,7 @@ export default function EnemyData() {
         {
             id: 2,
             name: "Ghost",
-            health: 1500,
+            health: 200,
             image: "/public/ghost.png",
             exp: 100,
             gold: 50
@@ -20,7 +20,7 @@ export default function EnemyData() {
         {
             id: 3,
             name: "Dragon",
-            health: 2000,
+            health: 250,
             image: "/public/dragon.png",
             exp: 200,
             gold: 100
