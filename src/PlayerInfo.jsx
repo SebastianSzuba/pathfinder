@@ -13,10 +13,6 @@ export default function PlayerInfo({ gold, exp, damagePerSecond, damagePerClick,
             setPurchaseMessage(`Du hast ${name} gekauft!`);
             // Nachricht nach 3 Sekunden ausblenden
             setTimeout(() => setPurchaseMessage(''), 3000);
-        } else {
-            setPurchaseMessage('Nicht genug Gold!');
-            // Nachricht nach 3 Sekunden ausblenden
-            setTimeout(() => setPurchaseMessage(''), 3000);
         }
     };
     return (
