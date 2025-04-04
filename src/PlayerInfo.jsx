@@ -1,8 +1,8 @@
 import React from 'react';
 import './PlayerInfo.css';
 
-// Empfängt gold und exp als Props
-export default function PlayerInfo({ gold, exp }) {
+// Empfängt gold, exp, damagePerSecond und damagePerClick als Props
+export default function PlayerInfo({ gold, exp, damagePerSecond, damagePerClick }) {
     return (
         <div className='player-box'>
             <h3>Spielerwerte</h3>
@@ -12,7 +12,12 @@ export default function PlayerInfo({ gold, exp }) {
             <div>
                 <span>✨ EXP: {exp}</span>
             </div>
-            {/* Hier könnten später weitere Spielerinfos hinzukommen (z.B. Level, HP) */}
+            <div>
+                <span>🔥 DPS: {damagePerSecond}</span>
+            </div>
+            <div>
+                <span>👆 DPC: {damagePerClick}</span>
+            </div>
         </div>
     );
 }
