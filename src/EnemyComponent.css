@@ -31,6 +31,11 @@ img {
   height: 450px;
   object-fit: contain;
   margin-bottom: 10px; /* Platz vor dem Lebensbalken */
+  user-select: none; /* verhindert Text- oder Bildauswahl */
+  -webkit-user-drag: none; /* verhindert Drag in WebKit-Browsern */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 /* Container für den Lebensbalken */

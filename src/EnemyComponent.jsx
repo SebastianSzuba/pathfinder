@@ -102,7 +102,7 @@ export default function EnemyComponent({ onEnemyDefeated, damagePerSecond, damag
     const healthPercentage = enemy.health > 0 ? (currentHealth / enemy.health) * 100 : 0;
 
     return (
-        <div className='enemy-box' onClick={handleAttack} style={{ cursor: 'pointer', height: '500px' }}> {/* Erhöhte Höhe für mehr Platz */}
+        <div className='enemy-box' draggable="false" userSelect="none" onClick={handleAttack} style={{ cursor: 'pointer', height: '500px' }}> {/* Erhöhte Höhe für mehr Platz */}
             <div key={enemy.id} style={{ position: 'relative', width: '100%', height: '100%' }}> {/* Relative Positionierung für absolute Kinder */}
                 <h2 className="enemy-name">{enemy.name}</h2>
 
@@ -128,6 +128,8 @@ export default function EnemyComponent({ onEnemyDefeated, damagePerSecond, damag
                     }}
                 >
                     <img
+                        userSelect="none" // Verhindert das Markieren des Bildes
+                        draggable="false" // Verhindert das Ziehen des Bildes
                         src={enemy.image}
                         alt={enemy.name}
                         className="enemy-image animated-image"
