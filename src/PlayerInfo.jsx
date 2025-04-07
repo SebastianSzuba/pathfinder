@@ -79,6 +79,18 @@ export default function PlayerInfo({ gold, exp, damagePerSecond, damagePerClick,
                     </div>
 
                     <h4>DPC-Waffen</h4>
+
+                    <div className="weapon-item">
+                        <span>🦴 Knochen (+1 DPC)</span>
+                        <button
+                            onClick={() => handlePurchase('Knochen', 50, 0, 1)}
+                            disabled={gold < 50}
+                            className={gold < 50 ? 'disabled' : ''}
+                        >
+                            Kaufen 💰 50
+                        </button>
+                    </div>
+
                     <div className="weapon-item">
                         <span>🧤 Handschuhe (+2 DPC)</span>
                         <button
