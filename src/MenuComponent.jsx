@@ -1,45 +1,24 @@
-
-
-
 import React from 'react';
 import './MenuComponent.css';
 
-// Empfängt die Zustandsdaten als Props
-export default function MenuComponent({ playerGold, playerExp, damagePerSecond, damagePerClick }) {
+// Empfängt nur noch die resetGameState Funktion als Prop
+export default function MenuComponent({ resetGameState }) {
 
-    const handleSave = () => {
-        const gameState = {
-            playerGold,
-            playerExp,
-            damagePerSecond,
-            damagePerClick
-        };
-        try {
-            localStorage.setItem('pathfinderGameState', JSON.stringify(gameState));
-            console.log('Spielstand gespeichert:', gameState);
-            alert('Spielstand gespeichert!'); // Einfaches Feedback
-        } catch (error) {
-            console.error('Fehler beim Speichern des Spielstands:', error);
-            alert('Fehler beim Speichern!');
-        }
-    };
+    // handleSave Funktion und Logik entfernt
 
+    // handleReset ruft jetzt die übergebene Funktion auf
     const handleReset = () => {
-        try {
-            localStorage.removeItem('pathfinderGameState');
-            console.log('Gespeicherter Spielstand gelöscht.');
-            alert('Gespeicherter Spielstand gelöscht!'); // Einfaches Feedback
-        } catch (error) {
-            console.error('Fehler beim Löschen des Spielstands:', error);
-            alert('Fehler beim Löschen!');
+        // Bestätigungsdialog hinzufügen (optional aber empfohlen)
+        if (window.confirm('Möchtest du wirklich den Spielstand zurücksetzen? Alle Fortschritte gehen verloren!')) {
+            resetGameState(); // Ruft die Funktion aus App.jsx auf
         }
     };
 
     return (
         <div className='menu-box'>
             <span>Menu</span>
-            <button onClick={handleSave}>Speichern</button>
-            <button onClick={handleReset}>Reset Save</button> {/* Geänderter Text zur Klarheit */}
+            {/* Speicherbutton entfernt */}
+            <button onClick={handleReset}>Reset Save</button>
         </div>
     );
 }

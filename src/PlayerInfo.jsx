@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
 import './PlayerInfo.css';
 
-// Empfängt gold, exp, damagePerSecond, damagePerClick und buyWeapon als Props
-export default function PlayerInfo({ gold, exp, damagePerSecond, damagePerClick, buyWeapon }) {
-    // State für Erfolgsmeldungen beim Kauf
+// Empfängt Props, erweitert um Krit-Werte und Upgrade-Funktion
+export default function PlayerInfo({
+    gold,
+    exp,
+    damagePerSecond,
+    damagePerClick,
+    critMultiplier, // Neu
+    critUpgradeCost, // Neu
+    buyWeapon,
+    buyCritUpgrade // Neu
+}) {
+    // State für Erfolgsmeldungen beim Kauf (kann für beide Käufe genutzt werden)
     const [purchaseMessage, setPurchaseMessage] = useState('');
 
     // Funktion zum Kaufen einer Waffe
@@ -15,6 +24,17 @@ export default function PlayerInfo({ gold, exp, damagePerSecond, damagePerClick,
             setTimeout(() => setPurchaseMessage(''), 3000);
         }
     };
+
+    // Funktion zum Kaufen eines Krit-Upgrades
+    const handleCritUpgradePurchase = (name, cost, multiplierIncrease) => {
+        const success = buyCritUpgrade(cost, multiplierIncrease); // Ruft die neue Funktion auf
+        if (success) {
+            setPurchaseMessage(`Du hast ${name} gekauft! Krit-Multiplikator erhöht.`);
+            // Nachricht nach 3 Sekunden ausblenden
+            setTimeout(() => setPurchaseMessage(''), 3000);
+        }
+    };
+
     return (
         <div className='player-box'>
             <h3>Spielerwerte</h3>
@@ -29,6 +49,9 @@ export default function PlayerInfo({ gold, exp, damagePerSecond, damagePerClick,
             </div>
             <div>
                 <span>👆 DPC: {damagePerClick}</span>
+            </div>
+            <div>
+                <span>💥 Krit-Multiplikator: {critMultiplier.toFixed(1)}x</span> {/* Anzeige Krit-Multiplikator */}
             </div>
 
             {/* Shop-Bereich */}
@@ -123,6 +146,19 @@ export default function PlayerInfo({ gold, exp, damagePerSecond, damagePerClick,
                             Kaufen 💰 500
                         </button>
                     </div>
+                </div>
+
+                {/* Krit-Upgrade Bereich */}
+                <h4>✨ Upgrades</h4>
+                <div className="weapon-item">
+                    <span>Krit-Multiplikator (+0.2x)</span>
+                    <button
+                        onClick={() => handleCritUpgradePurchase('Krit-Upgrade', critUpgradeCost, 0.2)}
+                        disabled={gold < critUpgradeCost}
+                        className={gold < critUpgradeCost ? 'disabled' : ''}
+                    >
+                        Kaufen 💰 {critUpgradeCost} {/* Dynamische Kosten */}
+                    </button>
                 </div>
             </div>
         </div>

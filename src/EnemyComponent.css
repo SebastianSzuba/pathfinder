@@ -184,3 +184,35 @@ img {
     transform: translate(0, 0);
   }
 }
+
+/* --- Floating Damage Numbers --- */
+.damage-number {
+  position: absolute; /* Absolute Positionierung relativ zum .enemy-box Container */
+  font-size: 1.5em; /* Größere Schrift */
+  font-weight: bold;
+  color: white; /* Standardfarbe weiß */
+  text-shadow: 1px 1px 2px black; /* Schatten für Lesbarkeit */
+  pointer-events: none; /* Verhindert, dass die Zahl Klicks abfängt */
+  user-select: none; /* Verhindert Auswahl */
+  animation: floatUpFadeOut 1s ease-out forwards; /* Animation hinzufügen */
+  z-index: 100; /* Stellt sicher, dass sie über anderen Elementen liegen */
+}
+
+.damage-number.crit-damage {
+  color: yellow; /* Farbe für kritische Treffer */
+  font-size: 3em; /* Noch größer für Krit */
+  font-weight: bolder;
+  text-shadow: 1px 1px 3px red; /* Auffälligerer Schatten */
+}
+
+/* Animation für das Aufsteigen und Verblassen */
+@keyframes floatUpFadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0); /* Startposition (wo geklickt wurde) */
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-50px); /* Endposition (50px nach oben) */
+  }
+}
