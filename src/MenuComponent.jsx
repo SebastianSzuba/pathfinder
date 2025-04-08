@@ -1,5 +1,6 @@
 import React from 'react';
 import './MenuComponent.css';
+import './EnemyComponent.jsx';
 
 // Empfängt nur noch die resetGameState Funktion als Prop
 export default function MenuComponent({ resetGameState }) {
@@ -12,6 +13,7 @@ export default function MenuComponent({ resetGameState }) {
         if (window.confirm('Möchtest du wirklich den Spielstand zurücksetzen? Alle Fortschritte gehen verloren!')) {
             resetGameState(); // Ruft die Funktion aus App.jsx auf
         }
+
     };
 
     return (
