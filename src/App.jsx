@@ -17,6 +17,17 @@ function App() {
   const [critMultiplier, setCritMultiplier] = useState(1.5); // Startwert 1.5x
   const [critUpgradeCost, setCritUpgradeCost] = useState(200); // Startkosten 200 Gold
 
+  // State für Waffenpreise
+  const [weaponPrices, setWeaponPrices] = useState({
+    dagger: 50,      // Dolch
+    sword: 150,      // Schwert
+    wand: 300,       // Zauberstab
+    bone: 50,        // Knochen
+    gloves: 75,      // Handschuhe
+    axe: 200,        // Axt
+    hammer: 500      // Hammer
+  });
+
   // Load game state from Local Storage on initial mount
   useEffect(() => {
     const savedState = localStorage.getItem('pathfinderGameState');
@@ -29,6 +40,10 @@ function App() {
         setDamagePerClick(state.damagePerClick || 3);
         setCritMultiplier(state.critMultiplier || 1.5); // Krit-Multiplikator laden
         setCritUpgradeCost(state.critUpgradeCost || 200); // Krit-Upgrade-Kosten laden
+        // Waffenpreise laden, falls vorhanden, sonst Standardwerte verwenden
+        if (state.weaponPrices) {
+          setWeaponPrices(state.weaponPrices);
+        }
         console.log("Spielstand geladen:", state);
       } catch (error) {
         console.error("Fehler beim Laden des Spielstands:", error);
@@ -46,11 +61,12 @@ function App() {
       damagePerSecond,
       damagePerClick,
       critMultiplier,
-      critUpgradeCost // Krit-Werte hinzufügen
+      critUpgradeCost, // Krit-Werte hinzufügen
+      weaponPrices // Waffenpreise speichern
     };
     localStorage.setItem('pathfinderGameState', JSON.stringify(gameState));
     // console.log("Spielstand gespeichert:", gameState); // Optional: Zum Debuggen
-  }, [playerGold, playerExp, damagePerSecond, damagePerClick, critMultiplier, critUpgradeCost]); // Abhängigkeiten erweitern
+  }, [playerGold, playerExp, damagePerSecond, damagePerClick, critMultiplier, critUpgradeCost, weaponPrices]); // Abhängigkeiten erweitern
 
   // Funktion zum Hinzufügen von Belohnungen, wenn ein Gegner besiegt wird
   const handleEnemyDefeated = (gold, exp) => {
@@ -60,7 +76,7 @@ function App() {
   };
 
   // Funktion zum Kaufen von Waffen
-  const buyWeapon = (cost, dpsIncrease, dpcIncrease) => {
+  const buyWeapon = (weaponId, cost, dpsIncrease, dpcIncrease) => {
     if (playerGold >= cost) {
       setPlayerGold(prevGold => prevGold - cost);
 
@@ -71,6 +87,12 @@ function App() {
       if (dpcIncrease > 0) {
         setDamagePerClick(prevDPC => prevDPC + dpcIncrease);
       }
+
+      // Preis für die gekaufte Waffe erhöhen (um 50%)
+      setWeaponPrices(prevPrices => ({
+        ...prevPrices,
+        [weaponId]: Math.round(prevPrices[weaponId] * 1.5)
+      }));
 
       return true; // Kauf erfolgreich
     }
@@ -100,6 +122,16 @@ function App() {
       setDamagePerClick(3);
       setCritMultiplier(1.5);
       setCritUpgradeCost(200);
+      // Waffenpreise zurücksetzen
+      setWeaponPrices({
+        dagger: 50,
+        sword: 150,
+        wand: 300,
+        bone: 50,
+        gloves: 75,
+        axe: 200,
+        hammer: 500
+      });
       console.log('Spielstand zurückgesetzt.');
       alert('Spielstand zurückgesetzt!'); // Feedback für den Benutzer
     } catch (error) {
@@ -131,6 +163,7 @@ function App() {
         damagePerClick={damagePerClick}
         critMultiplier={critMultiplier} // Krit-Multiplikator übergeben
         critUpgradeCost={critUpgradeCost} // Krit-Upgrade-Kosten übergeben
+        weaponPrices={weaponPrices} // Waffenpreise übergeben
         buyWeapon={buyWeapon}
         buyCritUpgrade={buyCritUpgrade} // Krit-Upgrade-Kauffunktion übergeben
       />

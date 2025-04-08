@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './PlayerInfo.css';
 
-// Empfängt Props, erweitert um Krit-Werte und Upgrade-Funktion
+// Empfängt Props, erweitert um Krit-Werte, Waffenpreise und Upgrade-Funktion
 export default function PlayerInfo({
     gold,
     exp,
@@ -9,6 +9,7 @@ export default function PlayerInfo({
     damagePerClick,
     critMultiplier, // Neu
     critUpgradeCost, // Neu
+    weaponPrices, // Neu: Objekt mit allen Waffenpreisen
     buyWeapon,
     buyCritUpgrade // Neu
 }) {
@@ -16,8 +17,8 @@ export default function PlayerInfo({
     const [purchaseMessage, setPurchaseMessage] = useState('');
 
     // Funktion zum Kaufen einer Waffe
-    const handlePurchase = (name, cost, dpsIncrease, dpcIncrease) => {
-        const success = buyWeapon(cost, dpsIncrease, dpcIncrease);
+    const handlePurchase = (weaponId, name, cost, dpsIncrease, dpcIncrease) => {
+        const success = buyWeapon(weaponId, cost, dpsIncrease, dpcIncrease);
         if (success) {
             setPurchaseMessage(`Du hast ${name} gekauft!`);
             // Nachricht nach 3 Sekunden ausblenden
@@ -71,33 +72,33 @@ export default function PlayerInfo({
                     <div className="weapon-item">
                         <span>🗡️ Dolch (+1 DPS)</span>
                         <button
-                            onClick={() => handlePurchase('Dolch', 50, 1, 0)}
-                            disabled={gold < 50}
-                            className={gold < 50 ? 'disabled' : ''}
+                            onClick={() => handlePurchase('dagger', 'Dolch', weaponPrices.dagger, 1, 0)}
+                            disabled={gold < weaponPrices.dagger}
+                            className={gold < weaponPrices.dagger ? 'disabled' : ''}
                         >
-                            Kaufen 💰 50
+                            Kaufen 💰 {weaponPrices.dagger}
                         </button>
                     </div>
 
                     <div className="weapon-item">
                         <span>⚔️ Schwert (+3 DPS)</span>
                         <button
-                            onClick={() => handlePurchase('Schwert', 150, 3, 0)}
-                            disabled={gold < 150}
-                            className={gold < 150 ? 'disabled' : ''}
+                            onClick={() => handlePurchase('sword', 'Schwert', weaponPrices.sword, 3, 0)}
+                            disabled={gold < weaponPrices.sword}
+                            className={gold < weaponPrices.sword ? 'disabled' : ''}
                         >
-                            Kaufen 💰 150
+                            Kaufen 💰 {weaponPrices.sword}
                         </button>
                     </div>
 
                     <div className="weapon-item">
                         <span>🪄 Zauberstab (+5 DPS)</span>
                         <button
-                            onClick={() => handlePurchase('Zauberstab', 300, 5, 0)}
-                            disabled={gold < 300}
-                            className={gold < 300 ? 'disabled' : ''}
+                            onClick={() => handlePurchase('wand', 'Zauberstab', weaponPrices.wand, 5, 0)}
+                            disabled={gold < weaponPrices.wand}
+                            className={gold < weaponPrices.wand ? 'disabled' : ''}
                         >
-                            Kaufen 💰 300
+                            Kaufen 💰 {weaponPrices.wand}
                         </button>
                     </div>
 
@@ -106,44 +107,44 @@ export default function PlayerInfo({
                     <div className="weapon-item">
                         <span>🦴 Knochen (+1 DPC)</span>
                         <button
-                            onClick={() => handlePurchase('Knochen', 50, 0, 1)}
-                            disabled={gold < 50}
-                            className={gold < 50 ? 'disabled' : ''}
+                            onClick={() => handlePurchase('bone', 'Knochen', weaponPrices.bone, 0, 1)}
+                            disabled={gold < weaponPrices.bone}
+                            className={gold < weaponPrices.bone ? 'disabled' : ''}
                         >
-                            Kaufen 💰 50
+                            Kaufen 💰 {weaponPrices.bone}
                         </button>
                     </div>
 
                     <div className="weapon-item">
                         <span>🧤 Handschuhe (+2 DPC)</span>
                         <button
-                            onClick={() => handlePurchase('Handschuhe', 75, 0, 2)}
-                            disabled={gold < 75}
-                            className={gold < 75 ? 'disabled' : ''}
+                            onClick={() => handlePurchase('gloves', 'Handschuhe', weaponPrices.gloves, 0, 2)}
+                            disabled={gold < weaponPrices.gloves}
+                            className={gold < weaponPrices.gloves ? 'disabled' : ''}
                         >
-                            Kaufen 💰 75
+                            Kaufen 💰 {weaponPrices.gloves}
                         </button>
                     </div>
 
                     <div className="weapon-item">
                         <span>🪓 Axt (+5 DPC)</span>
                         <button
-                            onClick={() => handlePurchase('Axt', 200, 0, 5)}
-                            disabled={gold < 200}
-                            className={gold < 200 ? 'disabled' : ''}
+                            onClick={() => handlePurchase('axe', 'Axt', weaponPrices.axe, 0, 5)}
+                            disabled={gold < weaponPrices.axe}
+                            className={gold < weaponPrices.axe ? 'disabled' : ''}
                         >
-                            Kaufen 💰 200
+                            Kaufen 💰 {weaponPrices.axe}
                         </button>
                     </div>
 
                     <div className="weapon-item">
                         <span>🔨 Hammer (+10 DPC)</span>
                         <button
-                            onClick={() => handlePurchase('Hammer', 500, 0, 10)}
-                            disabled={gold < 500}
-                            className={gold < 500 ? 'disabled' : ''}
+                            onClick={() => handlePurchase('hammer', 'Hammer', weaponPrices.hammer, 0, 10)}
+                            disabled={gold < weaponPrices.hammer}
+                            className={gold < weaponPrices.hammer ? 'disabled' : ''}
                         >
-                            Kaufen 💰 500
+                            Kaufen 💰 {weaponPrices.hammer}
                         </button>
                     </div>
                 </div>
