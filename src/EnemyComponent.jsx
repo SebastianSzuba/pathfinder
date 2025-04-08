@@ -13,11 +13,16 @@ export default function EnemyComponent({ onEnemyDefeated, damagePerSecond, damag
     const [damageNumbers, setDamageNumbers] = useState([]); // State für schwebende Schadenszahlen
     const imageRef = useRef(null); // Ref für das Bild-Element
     const enemyBoxRef = useRef(null); // Ref für den Container, um Klick-Koordinaten relativ zu bekommen
+    const [defeatedEnemies, setDefeatedEnemies] = useState(0);
 
     // Funktion zum Holen und Setzen eines neuen Gegners
     const getNewEnemy = () => {
         console.log("getNewEnemy wird aufgerufen."); // Debugging
         const newEnemy = EnemyData();
+        // Skaliere die Gesundheit abhängig von besiegten Gegnern
+        const scaledHealth = Math.round(newEnemy.health * Math.pow(1.5, defeatedEnemies));
+
+        newEnemy.health = scaledHealth; // Optional, damit du später drauf zugreifen kannst
         setEnemy(newEnemy);
         setCurrentHealth(newEnemy.health);
         setImageScale(1); // Setzt die Bildgröße zurück, wenn ein neuer Gegner erscheint
@@ -54,6 +59,9 @@ export default function EnemyComponent({ onEnemyDefeated, damagePerSecond, damag
             if (onEnemyDefeated) {
                 onEnemyDefeated(enemy.gold, enemy.exp);
             }
+
+            // 👇 Gegnerzähler erhöhen
+            setDefeatedEnemies(prev => prev + 1);
 
             // SOFORT neuen Gegner holen
             getNewEnemy();
